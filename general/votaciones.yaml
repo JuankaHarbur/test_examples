@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mocker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mocker
+  template:
+    metadata:
+      labels:
+        app: mocker
+    spec:
+      containers:
+        - name: mockerservice
+          image: "mockerservice"
+          imagePullPolicy: IfNotPresent
+          command: ["java", "-jar", "MockerService.jar"]
+          ports: 
+             - containerPort: 8080
+---
+
+apiVersion: v1
+kind: Service
+metadata: 
+    name: mocker
+    labels:
+        app: mocker
+spec:
+    type: LoadBalancer
+    ports:
+      - name: http
+        port: 80
+        protocol: TCP
+        targetPort: 8080
+    selector:
+        app: mocker
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: votar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: votar
+  template:
+    metadata:
+      labels:
+        app: votar
+    spec:
+        containers:
+            - name: votarservice
+              image: "votarservice"
+              imagePullPolicy: IfNotPresent
+              command: ["./main"]
+              ports: 
+                 - containerPort: 8181
+
+---
+
+apiVersion: v1
+kind: Service
+metadata: 
+    name: votar
+    labels:
+        app: votar
+spec:
+    type: LoadBalancer
+    ports:
+      - name: httpgo
+        port: 80
+        protocol: TCP
+        targetPort: 8181
+    selector:
+        app: votar
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+        containers:
+            - name: clientevotador
+              image: "clientevotador"
+              imagePullPolicy: IfNotPresent
+              command: ["./main"]
