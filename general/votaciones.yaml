@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mockerservice
-          image: "mockerservice"
+          image: "juankanh/mockerservice"
           imagePullPolicy: IfNotPresent
           command: ["java", "-jar", "MockerService.jar"]
           ports: 
@@ -55,7 +55,7 @@ spec:
     spec:
         containers:
             - name: votarservice
-              image: "votarservice"
+              image: "juankanh/votarservice"
               imagePullPolicy: IfNotPresent
               command: ["./main"]
               ports: 
@@ -97,6 +97,6 @@ spec:
     spec:
         containers:
             - name: clientevotador
-              image: "clientevotador"
+              image: "juankanh/clientevotador"
               imagePullPolicy: IfNotPresent
               command: ["./main"]
