@@ -1,7 +1,3 @@
-# test_votaciones
+# test_exmples
 
-Demo de votacion de clientes
-
-Client - vota con un DNI y nombre en el votador
-Votar - recive la peticion del cliente y la pasa directamente a mocker
-Mocker- va contavilizando los votos y los devuelve en el resultado de la misma peticion.
+Demo de ejemplos de k8s
