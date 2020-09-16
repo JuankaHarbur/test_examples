@@ -86,7 +86,7 @@ kind: Deployment
 metadata:
   name: client
 spec:
-  replicas: 50
+  replicas: 5
   selector:
     matchLabels:
       app: client
